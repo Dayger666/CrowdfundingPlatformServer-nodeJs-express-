@@ -4,16 +4,20 @@ const Company = mongoose.model('Company');
 
 module.exports = {
     saveCompany: async (req, res, next) => {
-        let companyData = JSON.parse(req.query.data);
+        // let companyData = JSON.parse(req.query.data);
+        console.log(req.body.userID);
+
         let newCompany = new Company({
-            userId: companyData.id,
-            name: companyData.name,
-            category: companyData.category,
-            description: companyData.description,
-            youTubeLink: companyData.youtubeLink,
-            sum: companyData.sum,
-            terminalDate: companyData.date,
-            files: companyData.files,
+            userID: req.body.userID,
+            companyID:await Company.collection.countDocuments()+1,
+            name: req.body.name,
+            description: req.body.description,
+            category: req.body.category,
+            location: req.body.location,
+            images:req.body.images,
+            youTubeLink: req.body.youTubeLink,
+            donateGoal: req.body.donateGoal,
+            duration: req.body.duration,
         });
         await newCompany.save();
         return res.status(200).json('success');

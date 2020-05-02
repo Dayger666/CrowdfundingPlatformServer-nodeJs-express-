@@ -12,11 +12,15 @@ let ratingSchema = Schema({
 })
 
 let companySchema = Schema({
-    name: {
+    userID: {
         type: String,
         required: true
     },
-    category: {
+    companyID:{
+        type: String,
+        required: true
+    },
+    name: {
         type: String,
         required: true
     },
@@ -24,7 +28,15 @@ let companySchema = Schema({
         type: String,
         required: true
     },
-    files: {
+    category: {
+        type: String,
+        required: true
+    },
+    location:{
+        type: String,
+        required: true
+    },
+    images: {
         type: [String],
         // required: true
     },
@@ -32,7 +44,7 @@ let companySchema = Schema({
         type: String,
         // required: true
     },
-    sum: {
+    donateGoal: {
         type: Number,
         required: true
     },
@@ -40,12 +52,8 @@ let companySchema = Schema({
         type: Date,
         default: Date.now(), 
     },
-    terminalDate: {
-        type: Date,
-        required: true
-    },
-    userId: {
-        type: String,
+    duration: {
+        type: Number,
         required: true
     },
     currentSum: {

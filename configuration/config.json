@@ -1,7 +1,7 @@
 {
     "development": {
         "PORT": 3000,
-        "MONGODB_URI": "mongodb://localhost:27017/CrowdfundingDB",
+        "MONGODB_URI": "mongodb+srv://Dayger666:dima05191@cluster0-1wer5.mongodb.net/test?retryWrites=true&w=majority",
         "JWT_SECRET": "SECRET#123",
         "JWT_EXP": "720m"
     },

@@ -11,9 +11,11 @@ let userSchema = new Schema({
         required: true
     },
     local: {
+        userID: {
+            type: Number,
+        },
         userName: {
             type: String,
-
         },
         email: {
             type: String,
@@ -30,7 +32,10 @@ let userSchema = new Schema({
         },
         saltSecret: String
     },
-    facebook: { 
+    facebook: {
+        userID: {
+            type: Number,
+        },
         id: {
             type: String,
         },
@@ -47,7 +52,10 @@ let userSchema = new Schema({
 
         },
     },
-    google: { 
+    google: {
+        userID: {
+            type: Number,
+        },
         id: {
             type: String,
         },

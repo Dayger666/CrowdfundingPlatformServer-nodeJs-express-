@@ -15,7 +15,7 @@ router.get('/auth/me', jwtHelper.verifyJwtToken, userController.userProfile);
 router.post('/oauth/facebook', passport.authenticate('facebook-token', { session: false }), userController.facebookOauth);
 router.post('/oauth/google', passport.authenticate('google-token', {session: false}), userController.googleOauth);
 
-router.get('/saveCompany', companyController.saveCompany);
+router.post('/saveCompany', companyController.saveCompany);
 router.get('/getCompanies', companyController.getCompanies);
 router.get('/getCompanyDetails', companyController.getCompanyDetails);
 router.get('/getCompanyByCategory', companyController.getCompanyByCategory);
