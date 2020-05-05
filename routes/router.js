@@ -5,9 +5,8 @@ const passport = require('passport');
 
 const userController = require('../controllers/user.controller');
 const companyController = require('../controllers/company.controller.js');
-const commentController = require('../controllers/comment.controller');
 const ratingController = require('../controllers/rating.controller');
-
+const commentController = require('../controllers/comment.controller');
 
 router.post('/auth/register', userController.register);
 router.post('/auth/authenticate', userController.authenticate);
@@ -17,13 +16,16 @@ router.post('/oauth/google', passport.authenticate('google-token', {session: fal
 
 router.post('/saveCompany', companyController.saveCompany);
 router.get('/getCompanies', companyController.getCompanies);
-router.get('/getCompanyDetails', companyController.getCompanyDetails);
-router.get('/getCompanyByCategory', companyController.getCompanyByCategory);
-router.get('/donate', companyController.donate);
+router.post('/getCompaniesBuUserId', companyController.getCompaniesBuUserId);
+router.post('/removeProjectById', companyController.removeCompanyById);
+router.get('/getCompanyDetails/:projectID?', companyController.getCompanyDetails);
+router.post('/getCompanyByCategory', companyController.getCompanyByCategory);
+router.put('/donate', companyController.donate);
 
 router.get('/getOldComments', commentController.getComments);
+router.put('/saveComment', commentController.saveComment);
 
-router.get('/saveRating', ratingController.saveSingleRating);
+router.put('/saveRating', ratingController.saveSingleRating);
 // router.get('/getRating', ratingController.getRating);
 
 

@@ -3,20 +3,29 @@ const Schema = mongoose.Schema;
 
 let commentSchema = Schema({
     idUser: String,
+    userImg:String,
     userName: String,
+    date:{
+        type: String,
+        default: new Date().toLocaleString(),
+    },
     text: String, 
-})
+});
 let ratingSchema = Schema({
     idUser: String,
     personalRating: Number,
-})
+});
 
 let companySchema = Schema({
     userID: {
         type: String,
         required: true
     },
-    companyID:{
+    userName:{
+        type: String,
+        required: true
+    },
+    projectID:{
         type: String,
         required: true
     },
@@ -49,7 +58,7 @@ let companySchema = Schema({
         required: true
     },
     beginningDate: {
-        type: Date,
+        type: Number,
         default: Date.now(), 
     },
     duration: {

@@ -5,11 +5,10 @@ const Company = mongoose.model('Company');
 module.exports = {
     saveCompany: async (req, res, next) => {
         // let companyData = JSON.parse(req.query.data);
-        console.log(req.body.userID);
-
         let newCompany = new Company({
             userID: req.body.userID,
-            companyID:await Company.collection.countDocuments()+1,
+            userName:req.body.userName,
+            projectID:await Company.collection.countDocuments()+1,
             name: req.body.name,
             description: req.body.description,
             category: req.body.category,
@@ -31,28 +30,46 @@ module.exports = {
     },
 
     getCompanyDetails: (req, res, next) => {
-        if (req.query.id) {
-            Company.findOne({ _id: req.query.id }, (err, company) => {
+        // if (req.query.id) {
+            Company.findOne({ projectID: req.params.projectID }, (err, company) => {
                 if (!err) return res.status(200).json(company);
                 throw new Error(err);
             });
-        } else if (req.query.userId) {
-            Company.find({ userId: req.query.userId }, (err, companies) => {
-                if (!err) return res.status(200).json(companies);
-                throw new Error(err);
-            });
-        }
+        // } else if (req.query.userId) {
+        //     Company.find({ userId: req.query.userId }, (err, companies) => {
+        //         if (!err) return res.status(200).json(companies);
+        //         throw new Error(err);
+        //     });
+        // }
     },
 
-    getCompanyByCategory: (req, res, next) => {
-        Company.find({ category: req.query.category }, (err, companies) => {
+    getCompanyByCategory: async(req, res, next) => {
+        let projects=[];
+        for(let category of req.body.projectCategory) {
+            await Company.find({category:category }, (err, companies) => {
+                if (!err) {
+                   projects=[...projects,...companies];
+                    // return res.status(200).json(companies);
+                }
+            });
+        }
+         return res.status(200).json(projects);
+    },
+    getCompaniesBuUserId: async (req,res,next)=>{
+        Company.find({userID:req.body.userID}, (err, companies) => {
             if (!err) return res.status(200).json(companies);
             throw new Error(err);
         });
     },
-
+    removeCompanyById: async (req, result, next) => {
+        Company.deleteOne({ projectID: req.body.projectID },  (err, res) => {
+            if (!err) return result.status(200).json('success');
+            throw new Error(err);
+        });
+    },
     donate: async (req, result, next) => {
-        Company.findOneAndUpdate({ _id: req.query.id }, { currentSum: req.query.donate }, { useFindAndModify: false }, (err, res) => {
+
+        Company.findOneAndUpdate({ projectID: req.body.projectID }, { currentSum: req.body.currentSum }, { useFindAndModify: false }, (err, res) => {
             if (!err) return result.status(200).json('success');
             throw new Error(err);
         });
