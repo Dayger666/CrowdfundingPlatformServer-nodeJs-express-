@@ -9,7 +9,7 @@ let commentSchema = Schema({
         type: String,
         default: new Date().toLocaleString(),
     },
-    text: String, 
+    text: String,
 });
 let ratingSchema = Schema({
     idUser: String,
@@ -59,7 +59,7 @@ let companySchema = Schema({
     },
     beginningDate: {
         type: Number,
-        default: Date.now(), 
+        default: Date.now(),
     },
     duration: {
         type: Number,
@@ -75,6 +75,6 @@ let companySchema = Schema({
 
 
 
-mongoose.model('Company', companySchema, 'companies');
+module.exports = mongoose.model('Company', companySchema, 'companies');
 
 // mongoose.model('User', userSchema, 'users');

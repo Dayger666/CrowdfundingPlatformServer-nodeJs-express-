@@ -19,7 +19,7 @@ module.exports = {
             duration: req.body.duration,
         });
         await newCompany.save();
-        return res.status(200).json('success');
+        return res.status(200).json(newCompany);
     },
 
     getCompanies: (req, res, next) => {
@@ -45,13 +45,10 @@ module.exports = {
 
     getCompanyByCategory: async(req, res, next) => {
         let projects=[];
-        for(let category of req.body.projectCategory) {
-            await Company.find({category:category }, (err, companies) => {
-                if (!err) {
-                   projects=[...projects,...companies];
-                    // return res.status(200).json(companies);
-                }
-            });
+        for(const category of req.body.projectCategory) {
+            console.log(category);
+           const project =  await Company.find({category:category });
+            projects.push(...project);
         }
          return res.status(200).json(projects);
     },

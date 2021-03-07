@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-
+const bcrypt = require('bcrypt');
 const Schema = mongoose.Schema;
 
 let userSchema = new Schema({
@@ -46,7 +45,7 @@ let userSchema = new Schema({
         email: {
             type: String,
             lowercase: true,
-        },        
+        },
         isAdmin: {
             type: Boolean,
 
@@ -66,7 +65,7 @@ let userSchema = new Schema({
         email: {
             type: String,
             lowercase: true,
-        },        
+        },
         isAdmin: {
             type: Boolean,
 
@@ -104,5 +103,5 @@ userSchema.methods.generateJwt = function (method) {
     });
 };
 
-mongoose.model('User', userSchema, 'users');
+module.exports =  mongoose.model('User', userSchema, 'users');
 

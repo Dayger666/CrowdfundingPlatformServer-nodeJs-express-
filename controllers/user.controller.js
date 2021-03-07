@@ -14,7 +14,7 @@ async function foundUser(email){
 
 module.exports = {
     register: async (req, res, next) => {
-
+            console.log(req.body);
         if(await foundUser(req.body.email)) {
             return res.status(422).send(['This email already exists']);
         }
